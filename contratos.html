@@ -5,8 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contrato | Recaudos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
 </head>
 <body>
+    <header>
+        <nav>
+            <div class="navBarIzquierda">
+                <ul>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/">Contratos</a></li>
+                    <li><a href="/">Recaudos</a></li>
+                    <li><a href="/">Por pagar</a></li>
+                    <li><a href="/">Recibos</a></li>
+                    <li><a href="/">Resumen</a></li>
+                </ul>
+            </div>
+            <div class="navBarDerecha">
+                <ul>
+                    <li class="navBarEmail">
+                        ronald@gmail.com
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+    </header>
+
     <div class="contenedorGlobal">
         
         <section class="nuevoContrato">
@@ -38,11 +65,31 @@
                 </label>
                 <span id="codigoUnico"></span>
 
-                <button type="button" onclick="crearNuevoContrato()">Crear</button>
+                <button class="botonPrimario" type="button" onclick="crearNuevoContrato()">Crear</button>
 
             </form>
 
         </section>
+        <section class="historico">
+            <ul class="listaHistorico">
+                <li class="valorHistorico">
+                    Historico
+                </li>
+                <li class="valorHistorico">
+                    Historico
+                </li>
+                <li class="valorHistorico">
+                    Historico
+                </li>
+                <li class="valorHistorico">
+                    Historico
+                </li>
+                <li class="valorHistorico">
+                    Historico
+                </li>
+            </ul>
+        </section>
+        
 
     </div>
     
