@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recaudos | Recaudos</title>
+</head>
+<body>
+    <div class="contenedorGlobal">
+
+        <h1>Recaudos</h1>
+        
+        <section class="nuevoRecaudo">
+            <h2>Nuevo recaudo</h2>
+
+            <form class="datosRecaudo" action="">
+
+                <label for="inputPagador">
+                    Nombre del pagador
+                </label>
+                <input type="text" id="inputPagador">
+
+                <label for="inputValorRecaudo">
+                    Valor del recaudo
+                </label>
+                <input type="number" name="" id="inputValorRecaudo">
+
+                <label for="fechaDePago">
+                    Fecha de pago
+                </label>
+                <input type="date" name="" id="fechaDeCorte">
+
+                <label for="pisoPagador">
+                    Piso que paga
+                </label>
+                <input type="number" name="" id="pisoPagador">
+
+                <label for="codigoUnico">
+                    Codigo único
+                </label>
+                <span id="codigoUnico"></span>
+
+                <button type="button" onclick="crearNuevoRecaudo()">Crear</button>
+
+            </form>
+        </section>
+        <section class="contratosVigentes">
+            <h2>Contratos vigentes</h2>
+            <ol>
+                <li>
+                    <span class="nombreContratanteVigente">NombreContratante</span>
+                    <span class="pisoVigente">104</span>
+                    <span class="codigoUnicoVigente">codigoUnicoContratante</span>
+                    <span class="fechaDeCorteVigente">01/01/2022</span>
+                </li>
+            </ol>
+        </section>
+    </div>
+</body>
+</html>
