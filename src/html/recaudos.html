@@ -5,8 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recaudos | Recaudos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <header>
+        <nav>
+            <div class="navBarIzquierda">
+                <ul>
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="./contratos.html">Contratos</a></li>
+                    <li><a href="./recaudos.html">Recaudos</a></li>
+                    <li><a href="/">Por pagar</a></li>
+                    <li><a href="/">Recibos</a></li>
+                    <li><a href="/">Resumen</a></li>
+                </ul>
+            </div>
+            <div class="navBarDerecha">
+                <ul>
+                    <li class="navBarEmail">
+                        ronald@gmail.com
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+    </header>
     <div class="contenedorGlobal">
 
         <h1>Recaudos</h1>
@@ -44,6 +70,17 @@
                 <button type="button" onclick="crearNuevoRecaudo()">Crear</button>
 
             </form>
+        </section>
+        <section class="ultimosPagos">
+            <h2>Últimos pagos</h2>
+            <ol>
+                <li>
+                    <span class="nombreContratanteVigente">NombreContratante</span>
+                    <span class="pisoVigente">104</span>
+                    <span class="codigoUnicoVigente">codigoUnicoContratante</span>
+                    <span class="fechaDeCorteVigente">01/01/2022</span>
+                </li>
+            </ol>
         </section>
         <section class="contratosVigentes">
             <h2>Contratos vigentes</h2>
