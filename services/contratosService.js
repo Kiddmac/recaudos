@@ -1,7 +1,10 @@
+const boom = require('@hapi/boom');
+const { redirect } = require('express/lib/response');
+
 class ContratosService {
 
     constructor(){
-        this.contratistas = [{
+        this.contratos = [{
             id: '1',
             nombreContratista: 'Ronald',
             fechaDeCorte: '8',
@@ -25,21 +28,50 @@ class ContratosService {
         },]
     }
 
-    create(){
-
+    async create(data){
+              const newContrato = {
+                ...data
+            }
+            this.contratos.push(newContrato);
+            return newContrato            
     }
-    find(){
-        return this.contratistas
 
+    async find(){
+        const contrato = this.contratos
+        if (contrato.length === 0){ 
+            throw boom.notFound('Aún no hay contratos')
+        }
+        return contrato
     }
-    findOne(id){
-    return this.contratistas.find(item => item.id === id)
-    }
-    update(){
 
+    async findOne(id){
+        const contrato =  this.contratos.find(item => item.id === id)
+        if (!contrato) {
+            throw boom.notFound('contrato not found')
+        }
+        return contrato;
     }
-    delete(){
 
+    async update(id, changes){
+        const index = this.contratos.findIndex(item => item.id === id)
+        if(index === -1){
+            throw boom.notFound('contrato not found')
+        }
+        const contrato = this.contratos[index]
+        this.contratos[index] = {
+            ...contrato,
+            ...changes
+        }
+        return contrato;
+    }
+    
+    async delete(id){
+        const index = this.contratos.findIndex(item => item.id === id)
+        if(index === -1){
+            throw boom.notFound('contrato not found')
+        }
+        this.contratos.splice(index, 1);
+        return { id }
     }
 }
 

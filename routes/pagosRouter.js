@@ -1,24 +1,61 @@
 const express = require ('express');
+const PagosService = require('../services/pagosService')
+
+const service = new PagosService;
 
 const router = express.Router();
 
-router.get('/', (req,res)=> {
-    res.json([{
-        nombreContratista: 'Ronald',
-        fechaDeCorte: '8',
-        valorPago: '400.000',
-        apto: '204',
-        valorLetras: 'Cuatrocientos mil pesos',
-        mesPagoDesde: 'mayo',
-        mesVence: 'junio',
-        fechaPago: '30-05-2022'
-    }])
+router.get('/', async (req,res,next)=> {
+    try {
+        const pagos = await service.find();
+        res.json(pagos)    
+    } catch (err) {
+        next(err)
+    }
 })
 
-router.get('/', (req,res)=> {
-    res.json({
-        Hola: 'por ahora hola!'
-    })
+router.get('/:id', async (req,res,next)=> {
+    try {
+        const { id } = req.params
+        const pago = await service.findOne(id)
+        res.json(pago)
+    } catch (err) {
+        next(err)   
+    } 
+})
+
+router.post('/', async (req,res,next)=> {
+    try {
+        const body = req.body
+        const pago = await service.create(body)
+        res.json(pago)
+    } catch (err) {
+        next(err)
+    }
+   
+})
+
+router.patch('/:id', async (req,res,next)=> {
+    try {
+        const { id } = req.params
+        const changes = req.body
+        const pago = await service.update(id, changes)
+        res.json(pago)
+    } catch (err) {
+        next(err)
+    }
+   
+})
+
+router.delete('/:id', async (req,res,next)=> {
+    try {
+        const { id } = req.params
+        const pago = await service.delete(id)
+        res.json(pago)
+    } catch (err) {
+        next(err)
+    }
+   
 })
 
 

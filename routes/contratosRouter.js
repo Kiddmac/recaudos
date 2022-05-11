@@ -4,45 +4,58 @@ const ContratosService = require ('../services/contratosService.js')
 const router = express.Router();
 const service = new ContratosService();
 
-router.get('/', (req,res)=> {
-    const contratistas = service.find();
-    res.json(contratistas)
+router.get('/', async (req,res,next)=> {
+    try {
+        const contrato = await service.find();
+        res.json(contrato)
+    } catch (err) {
+        next(err)
+    }
 })
 
-router.get('/:id', (req,res)=> {
+router.get('/:id', async (req,res,next)=> {
+    try {
     const { id } = req.params;
-    const contratista = service.findOne(id);
-    res.json(contratista)
+    const contrato = await service.findOne(id);
+    res.json(contrato)    
+    } catch (err) {
+    next(err)
+    }
+    
 })
 
 
-router.post('/', (req,res)=> {
-    const body = req.body;
-        res.json({
-            message: 'created',
-            data: body
-        }) 
+router.post('/', async (req,res,next)=> {
+    try {
+        const body = req.body;
+        const contrato = await service.create(body)
+        res.json(contrato) 
+    } catch (err) {
+    next(err)
+    }
+
     })
 
-router.patch('/:id', (req,res)=> {
-    const { id } = req.params
-    const body = req.body
-    res.json({
-        message: 'update',
-        data: body,
-        id,
-        
-    })
+router.patch('/:id', async (req,res,next)=> {
+    try {
+        const { id } = req.params
+        const changes = req.body
+        const contrato = await service.update(id,changes)
+        res.json(contrato)
+    } catch (err) {
+        next(err)
+    }
 })
 
-router.delete('/:id', (req,res)=> {
-    const { id } = req.params
-    const body = req.body
-    res.json({
-        message: 'delete',
-        data: body,
-        id,
-    })
+router.delete('/:id', async (req,res,next)=> {
+    try {
+        const { id } = req.params
+        const contrato = await service.delete(id);
+        res.json(contrato)
+    } catch (err) {
+        next(err)        
+    }
+
 })
 
 
