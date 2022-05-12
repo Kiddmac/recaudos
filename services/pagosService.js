@@ -11,7 +11,7 @@ class PagosService {
             apto: '204',
             valorLetras: 'Cuatrocientos mil pesos',
             mesPagoDesde: 'mayo',
-            mesVence: 'junio',
+            mesPagoHasta: 'junio',
             fechaPago: '30-05-2022'
         },
         {
@@ -22,7 +22,7 @@ class PagosService {
             apto: '204',
             valorLetras: 'Cuatrocientos mil pesos',
             mesPagoDesde: 'mayo',
-            mesVence: 'junio',
+            mesPagoHasta: 'junio',
             fechaPago: '30-05-2022'
         },
         {
@@ -33,7 +33,7 @@ class PagosService {
             apto: '204',
             valorLetras: 'Cuatrocientos mil pesos',
             mesPagoDesde: 'mayo',
-            mesVence: 'junio',
+            mesPagoHasta: 'junio',
             fechaPago: '30-05-2022'
         },]
     }
