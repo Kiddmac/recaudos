@@ -1,7 +1,7 @@
 const express = require ('express');
 const PagosService = require('../services/pagosService');
 const validatorHandler = require('../middlewares/validatorHandler');
-const {createPagoSchema, updatePagoSchema, getPagoSchema} = require('../schemas/pagosSchema')
+const {createPagoSchema, updatePagoSchema, getPagoSchema, deletePagoSchema} = require('../schemas/pagosSchema')
 
 const service = new PagosService;
 
@@ -42,27 +42,31 @@ router.post('/',
    
 })
 
-router.patch('/:id', async (req,res,next)=> {
-    try {
-        const { id } = req.params
-        const changes = req.body
-        const pago = await service.update(id, changes)
-        res.json(pago)
-    } catch (err) {
-        next(err)
-    }
+router.patch('/:id',
+    validatorHandler(updatePagoSchema, 'id'),
+    async (req,res,next)=> {
+        try {
+            const { id } = req.params
+            const changes = req.body
+            const pago = await service.update(id, changes)
+            res.json(pago)
+        } catch (err) {
+            next(err)
+        }
    
 })
 
-router.delete('/:id', async (req,res,next)=> {
-    try {
-        const { id } = req.params
-        const pago = await service.delete(id)
-        res.json(pago)
-    } catch (err) {
-        next(err)
-    }
-   
+router.delete('/:id',
+    validatorHandler(deletePagoSchema,'id'),
+    async (req,res,next)=> {
+        try {
+            const { id } = req.params
+            const pago = await service.delete(id)
+            res.json(pago)
+        } catch (err) {
+            next(err)
+        }
+    
 })
 
 

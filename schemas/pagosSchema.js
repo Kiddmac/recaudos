@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const createPagoSchema = Joi.object({
-     id : Joi.string().uuid(),
+     id : Joi.string(),
      nombreContratista : Joi.string().required(),
      fechaDeCorte : Joi.number().required(),
      valorPago : Joi.number().required(),
@@ -9,7 +9,7 @@ const createPagoSchema = Joi.object({
      valorLetras : Joi.string().required(),
      mesPagoDesde : Joi.string().required(),
      mesPagoHasta: Joi.string().required(),
-     //fechaPago : Joi.date().timestamp()
+     fechaPago : Joi.required()
 })
 const updatePagoSchema = Joi.object({
      nombreContratista : Joi.string(),
@@ -19,12 +19,14 @@ const updatePagoSchema = Joi.object({
      valorLetras : Joi.string(),
      mesPagoDesde : Joi.string(),
      mesPagoHasta : Joi.string(),
-     //fechaPago : Joi.date(),
 })
 
 const getPagoSchema = Joi.object({
     id: Joi.required()
 })
 
+const deletePagoSchema = Joi.object({
+     id: Joi.required()
+})
 
-module.exports = { createPagoSchema, updatePagoSchema, getPagoSchema }
+module.exports = { createPagoSchema, updatePagoSchema, getPagoSchema, deletePagoSchema }
