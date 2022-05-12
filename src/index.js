@@ -9,19 +9,18 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json())
 
-//const whiteList = [Colocar aquí los origenes
-//que podrán conectarse a la API
-// Ej: https://myapp.co, http://localhost:8080]
-//const options = {
- //   origin: (origin, cb) => {
-//        if(whiteList.includes(origin)){
-  //          cb(null, true)
-    //    }else {
-      //      cb(new Error('No tienes acceso'))
-    //    }
-  //  }
-//}
-app.use(cors())
+const whiteList = ['http://localhost:8080']
+const options = {
+   origin: (origin, cb) => {
+       if(whiteList.includes(origin) || !origin){
+          cb(null, true)
+    }else {
+     cb(new Error('No tienes acceso'))
+    }
+  }
+}
+
+app.use(cors(options))
 
 
 app.get('/', (req,res)=> {
