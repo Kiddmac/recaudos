@@ -3,7 +3,7 @@ version : '3.3'
 services: 
   postgres:
     image: postgres:13
-    environment: 
+    environment:
       - POSTGRES_DB=recaudos
       - POSTGRES_USER=ronald
       - POSTGRES_PASSWORD=admin123
@@ -11,3 +11,11 @@ services:
     - 5432:5432
     volumes: 
       - ./postgres_data:/var/lib/postgresql/data
+    
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@mail.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - 5050:80
