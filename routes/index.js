@@ -1,6 +1,7 @@
 const express = require('express')
 const contratosRouter = require ('./contratosRouter')
 const pagosRouter = require ('./pagosRouter')
+const usersRouter = require('./usersRouter')
 
 
 function routerApi(app) {
@@ -8,6 +9,7 @@ function routerApi(app) {
     app.use ('/api/v1', router);
     router.use('/contratos', contratosRouter)
     router.use('/pagos', pagosRouter)
+    router.use('/users', usersRouter )
 }
 
 module.exports = routerApi;

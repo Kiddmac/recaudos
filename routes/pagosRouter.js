@@ -4,7 +4,6 @@ const validatorHandler = require('../middlewares/validatorHandler');
 const {createPagoSchema, updatePagoSchema, getPagoSchema, deletePagoSchema} = require('../schemas/pagosSchema')
 
 const service = new PagosService;
-
 const router = express.Router();
 
 router.get('/', async (req,res,next)=> {
@@ -17,7 +16,7 @@ router.get('/', async (req,res,next)=> {
 })
 
 router.get('/:id', 
-    validatorHandler(getPagoSchema, 'params'),
+    validatorHandler(getPagoSchema, 'id'),
     async (req,res,next)=> {
         try {
             const { id } = req.params

@@ -1,15 +1,16 @@
 const Joi = require('joi');
 
 const createPagoSchema = Joi.object({
-     id : Joi.string(),
+     idRecibo : Joi.string(),
      nombreContratista : Joi.string().required(),
-     fechaDeCorte : Joi.number().required(),
+     fechaCorte : Joi.number().required(),
      valorPago : Joi.number().required(),
      apto : Joi.number().required(),
      valorLetras : Joi.string().required(),
-     mesPagoDesde : Joi.string().required(),
-     mesPagoHasta: Joi.string().required(),
-     fechaPago : Joi.required()
+     saldoPendiente: Joi.string(),
+     pagoDesde : Joi.string().required(),
+     pagoHasta: Joi.string().required(),
+     fechaPago : Joi.string()
 })
 const updatePagoSchema = Joi.object({
      nombreContratista : Joi.string(),

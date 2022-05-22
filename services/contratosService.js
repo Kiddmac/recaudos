@@ -1,51 +1,23 @@
 const boom = require('@hapi/boom');
-const { redirect } = require('express/lib/response');
+const { models } = require('../libs/sequelize')
 
 class ContratosService {
 
-    constructor(){
-        this.contratos = [{
-            id: '1',
-            nombreContratista: 'Ronald',
-            fechaDeCorte: '8',
-            apto: '204',
-            deposito: '200.000',
-            fechaContrato: '30-05-2022'
-        },{
-            id: "2",
-            nombreContratista: 'Ronald',
-            fechaDeCorte: '8',
-            apto: '204',
-            deposito: '200.000',
-            fechaContrato: '30-05-2022'
-        },{
-            id: '3',
-            nombreContratista: 'Ronald',
-            fechaDeCorte: '8',
-            apto: '204',
-            deposito: '200.000',
-            fechaContrato: '30-05-2022'
-        },]
-    }
-
     async create(data){
-              const newContrato = {
-                ...data
-            }
-            this.contratos.push(newContrato);
-            return newContrato            
+        const newContrato = await models.Contratos.create(data)
+        return newContrato
     }
 
     async find(){
-        const contrato = this.contratos
-        if (contrato.length === 0){ 
+        const query = await models.Contratos.findAll()
+        if (query.length === 0){ 
             throw boom.notFound('Aún no hay contratos')
         }
-        return contrato
+        return query;
     }
 
     async findOne(id){
-        const contrato =  this.contratos.find(item => item.id === id)
+        const contrato = await models.Contratos.findByPk(id)
         if (!contrato) {
             throw boom.notFound('contrato not found')
         }
@@ -53,25 +25,22 @@ class ContratosService {
     }
 
     async update(id, changes){
-        const index = this.contratos.findIndex(item => item.id === id)
-        if(index === -1){
+        const contrato = await models.Contratos.findByPk(id)
+        if(!contrato){
             throw boom.notFound('contrato not found')
         }
-        const contrato = this.contratos[index]
-        this.contratos[index] = {
-            ...contrato,
-            ...changes
-        }
-        return contrato;
+        const rta = contrato.update(changes)
+        
+        return rta;
     }
     
     async delete(id){
-        const index = this.contratos.findIndex(item => item.id === id)
-        if(index === -1){
+        const contrato = await models.Contratos.findByPk(id)
+        if(!contrato){
             throw boom.notFound('contrato not found')
         }
-        this.contratos.splice(index, 1);
-        return { id }
+        await contrato.destroy()
+        return {id}
     }
 }
 
