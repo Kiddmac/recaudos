@@ -64,12 +64,22 @@ const PagosSchema = {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
         field: 'created_at'
+    },
+    userId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        field: 'user_id',
+        references: {
+            model: 'user',
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
     }
 }
 
 class Pagos extends Model {
-    static associate() {
-
+    static associate(models) {
+        this.belongsTo(models.users, {as: 'users'})
     }
     static config(sequelize) {
         return {

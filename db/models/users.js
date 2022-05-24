@@ -1,4 +1,4 @@
-const {Model, DataTypes, Sequelize} = require ('sequelize');
+const {Model, DataTypes} = require ('sequelize');
 
 const USER_TABLE = 'user';
 
@@ -36,12 +36,15 @@ const UsersSchema = {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
         field: 'created_at'
-    }
+    },
 }
 
 class Users extends Model {
-    static associate() {
-
+    static associate(models) {
+        this.hasMany(models.pagos, {
+            as: 'pagos',
+            foreingKey: 'userId'
+        })
     }
     static config(sequelize) {
         return {
