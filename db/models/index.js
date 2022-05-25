@@ -9,6 +9,7 @@ function setupModels(sequelize) {
 
     Users.associate(sequelize.models)
     Pagos.associate(sequelize.models)
+    Contratos.associate(sequelize.models)
 
 }
 

@@ -79,7 +79,7 @@ const PagosSchema = {
 
 class Pagos extends Model {
     static associate(models) {
-        this.belongsTo(models.users, {as: 'users'})
+        this.belongsTo(models.users, {as: 'user'})
     }
     static config(sequelize) {
         return {

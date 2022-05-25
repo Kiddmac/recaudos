@@ -43,7 +43,11 @@ class Users extends Model {
     static associate(models) {
         this.hasMany(models.pagos, {
             as: 'pagos',
-            foreingKey: 'userId'
+            foreignKey: 'userId'
+        })
+        this.hasMany(models.Contratos, {
+            as: 'contratos',
+            foreignKey: 'userId'
         })
     }
     static config(sequelize) {

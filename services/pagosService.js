@@ -1,6 +1,7 @@
 const boom = require("@hapi/boom")
 const { models } = require('../libs/sequelize')
 
+
 class PagosService {
 
     async create(data){
@@ -9,7 +10,9 @@ class PagosService {
     }
 
     async find(){
-        const query = await models.pagos.findAll()
+        const query = await models.pagos.findAll({
+            include: ['user']
+        })
         if (query.length === 0){ 
             throw boom.notFound('Aún no hay pagos')
         }

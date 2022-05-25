@@ -10,7 +10,8 @@ const createPagoSchema = Joi.object({
      saldoPendiente: Joi.string(),
      pagoDesde : Joi.string().required(),
      pagoHasta: Joi.string().required(),
-     fechaPago : Joi.string()
+     fechaPago : Joi.string(),
+     userId: Joi.number().required()
 })
 const updatePagoSchema = Joi.object({
      nombreContratista : Joi.string(),

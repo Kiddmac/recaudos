@@ -9,7 +9,8 @@ const createContratoSchema = Joi.object({
      apto : Joi.number(),
      valorLetras : Joi.string(),
      fechaContrato : Joi.string(),
-     createdAt: Joi.string()
+     createdAt: Joi.string(),
+     userId: Joi.number(),
 })
 
 const updateContratoSchema = Joi.object({

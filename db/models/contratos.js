@@ -1,4 +1,4 @@
-const {Model, DataTypes, Sequelize} = require ('sequelize');
+const {Model, DataTypes} = require ('sequelize');
 
 const CONTRATOS_TABLE = 'contratos';
 
@@ -52,13 +52,22 @@ const ContratosSchema = {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
         field: 'created_at'
+    },
+    userId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'user',
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
     }
-
 }
 
 class Contratos extends Model {
-    static associate() {
-
+    static associate(models) {
+        this.belongsTo(models.users, {as: 'contrato'})
     }
     static config(sequelize) {
         return {
