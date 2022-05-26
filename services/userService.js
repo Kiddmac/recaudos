@@ -1,17 +1,19 @@
 const boom = require("@hapi/boom")
-const res = require("express/lib/response")
+
 
 const {models} = require ('../libs/sequelize')
 
 class UsersService {
 
     async create(data){
-        const newUser = await models.users.create(data)
+        const newUser = await models.User.create(data)
         return newUser
     }
 
     async find(){
-        const query = await models.users.findAll()
+        const query = await models.User.findAll({
+            include: ['pagos', 'contratos']
+        })
         if (query.length === 0){ 
             throw boom.notFound('Aún no hay usuarios')
         }
@@ -19,7 +21,7 @@ class UsersService {
     }
 
     async findOne(id){
-        const user = await models.users.findByPk(id, {
+        const user = await models.user.findByPk(id, {
             include: ['pagos']
         })
         if (!user) {
@@ -29,7 +31,7 @@ class UsersService {
     }
 
     async update(id, changes){
-        const user = await models.users.findByPk(id)
+        const user = await models.user.findByPk(id)
         if(!user){
             throw boom.notFound('user not found')
         }
@@ -39,7 +41,7 @@ class UsersService {
     }
     
     async delete(id){
-        const user = await models.users.findByPk(id)
+        const user = await models.user.findByPk(id)
         if(!user){
             throw boom.notFound('user not found')
         }

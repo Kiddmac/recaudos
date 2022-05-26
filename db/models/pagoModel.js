@@ -1,5 +1,7 @@
 const {Model, DataTypes, Sequelize} = require ('sequelize');
 
+const {USER_TABLE} = require('./userModel')
+
 const PAGOS_TABLE = 'pagos';
 
 const PagosSchema = {
@@ -65,27 +67,27 @@ const PagosSchema = {
         defaultValue: DataTypes.NOW,
         field: 'created_at'
     },
-    userId: {
+    userIdPago: {
         allowNull: false,
         type: DataTypes.INTEGER,
         field: 'user_id',
         references: {
-            model: 'user',
+            model: USER_TABLE,
             key: 'id'
         },
-        onUpdate: 'CASCADE',
+        onUpdate: 'CASCADE'
     }
 }
 
 class Pagos extends Model {
     static associate(models) {
-        this.belongsTo(models.users, {as: 'user'})
+        this.belongsTo(models.User, {as: 'user'})
     }
     static config(sequelize) {
         return {
             sequelize,
             tableName: PAGOS_TABLE,
-            modelName: 'pagos',
+            modelName: 'Pago',
             timestamps: false
         }
     }

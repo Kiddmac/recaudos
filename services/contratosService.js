@@ -4,12 +4,14 @@ const { models } = require('../libs/sequelize')
 class ContratosService {
 
     async create(data){
-        const newContrato = await models.Contratos.create(data)
+        const newContrato = await models.Contrato.create(data)
         return newContrato
     }
 
     async find(){
-        const query = await models.Contratos.findAll()
+        const query = await models.Contrato.findAll({
+            include: ['users']
+        })
         if (query.length === 0){ 
             throw boom.notFound('Aún no hay contratos')
         }
@@ -17,7 +19,7 @@ class ContratosService {
     }
 
     async findOne(id){
-        const contrato = await models.Contratos.findByPk(id)
+        const contrato = await models.contratos.findByPk(id)
         if (!contrato) {
             throw boom.notFound('contrato not found')
         }
@@ -25,7 +27,7 @@ class ContratosService {
     }
 
     async update(id, changes){
-        const contrato = await models.Contratos.findByPk(id)
+        const contrato = await models.contratos.findByPk(id)
         if(!contrato){
             throw boom.notFound('contrato not found')
         }
@@ -35,7 +37,7 @@ class ContratosService {
     }
     
     async delete(id){
-        const contrato = await models.Contratos.findByPk(id)
+        const contrato = await models.contratos.findByPk(id)
         if(!contrato){
             throw boom.notFound('contrato not found')
         }

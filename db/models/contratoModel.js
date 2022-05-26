@@ -1,10 +1,12 @@
 const {Model, DataTypes} = require ('sequelize');
 
+const {USER_TABLE} = require('./userModel')
+
 const CONTRATOS_TABLE = 'contratos';
 
 const ContratosSchema = {
     id: {
-        allowNull: false, 
+        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
@@ -19,7 +21,7 @@ const ContratosSchema = {
         type: DataTypes.STRING
     },
     fechaCorte: {
-        allowNull: false, 
+        allowNull: false,
         type: DataTypes.INTEGER,
         field: 'fecha_corte'
     },
@@ -53,27 +55,27 @@ const ContratosSchema = {
         defaultValue: DataTypes.NOW,
         field: 'created_at'
     },
-    userId: {
+    userIdContrato: {
         allowNull: false,
         type: DataTypes.INTEGER,
+        field: 'user_id',
         references: {
-            model: 'user',
+            model: USER_TABLE,
             key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
-    }
+    },
 }
 
 class Contratos extends Model {
     static associate(models) {
-        this.belongsTo(models.users, {as: 'contrato'})
+        this.belongsTo(models.User, {as: 'user'})
     }
     static config(sequelize) {
         return {
             sequelize,
             tableName: CONTRATOS_TABLE,
-            modelName: 'Contratos',
+            modelName: 'Contrato',
             timestamps: false
         }
     }

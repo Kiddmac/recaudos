@@ -5,22 +5,22 @@ const { models } = require('../libs/sequelize')
 class PagosService {
 
     async create(data){
-        const newpago = await models.pagos.create(data)
+        const newpago = await models.Pago.create(data)
         return newpago
     }
 
     async find(){
-        const query = await models.pagos.findAll({
+        const query = await models.Pago.findAll({
             include: ['user']
         })
         if (query.length === 0){ 
-            throw boom.notFound('Aún no hay pagos')
+            throw boom.notFound('Aún no hay pago')
         }
         return query;
     }
 
     async findOne(id){
-        const pago = await models.pagos.findByPk(id)
+        const pago = await models.pago.findByPk(id)
         if (!pago) {
             throw boom.notFound('pago not found')
         }
@@ -28,7 +28,7 @@ class PagosService {
     }
 
     async update(id, changes){
-        const pago = await models.pagos.findByPk(id)
+        const pago = await models.pago.findByPk(id)
         if(!pago){
             throw boom.notFound('pago not found')
         }
@@ -38,7 +38,7 @@ class PagosService {
     }
     
     async delete(id){
-        const pago = await models.pagos.findByPk(id)
+        const pago = await models.pago.findByPk(id)
         if(!pago){
             throw boom.notFound('pago not found')
         }
