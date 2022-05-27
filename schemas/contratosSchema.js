@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 const createContratoSchema = Joi.object({
      nombreContratista : Joi.string(),
-     cedula: Joi.string(),
+     cedula: Joi.number().integer(),
      deposito: Joi.string(),
      fechaCorte : Joi.number(),
      valorContrato : Joi.number(),
@@ -10,7 +10,7 @@ const createContratoSchema = Joi.object({
      valorLetras : Joi.string(),
      fechaContrato : Joi.string(),
      createdAt: Joi.string(),
-     userIdContrato: Joi.number(),
+     userId: Joi.number(),
 })
 
 const updateContratoSchema = Joi.object({
@@ -30,5 +30,10 @@ const getContratoSchema = Joi.object({
 const deleteContratoSchema = Joi.object({
      id: Joi.required()
 })
+const queryContratoSchema = Joi.object({
+     limit: Joi.number().integer(),
+     offset: Joi.number().integer(),
+     cedula: Joi.number().integer()
+})
 
-module.exports = { createContratoSchema, updateContratoSchema, getContratoSchema, deleteContratoSchema }
+module.exports = { queryContratoSchema, createContratoSchema, updateContratoSchema, getContratoSchema, deleteContratoSchema }

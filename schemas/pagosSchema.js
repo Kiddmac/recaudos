@@ -11,7 +11,7 @@ const createPagoSchema = Joi.object({
      pagoDesde : Joi.string().required(),
      pagoHasta: Joi.string().required(),
      fechaPago : Joi.string(),
-     userIdPago: Joi.number().required(),
+     userId: Joi.number().required(),
 })
 const updatePagoSchema = Joi.object({
      nombreContratista : Joi.string(),
@@ -31,4 +31,10 @@ const deletePagoSchema = Joi.object({
      id: Joi.required()
 })
 
-module.exports = { createPagoSchema, updatePagoSchema, getPagoSchema, deletePagoSchema }
+const queryPagoSchema = Joi.object({
+     limit: Joi.number().integer(),
+     offset: Joi.number().integer(),
+     idRecibo: Joi.string()
+})
+
+module.exports = { createPagoSchema, updatePagoSchema, getPagoSchema, deletePagoSchema, queryPagoSchema }

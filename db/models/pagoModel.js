@@ -67,7 +67,7 @@ const PagosSchema = {
         defaultValue: DataTypes.NOW,
         field: 'created_at'
     },
-    userIdPago: {
+    userId: {
         allowNull: false,
         type: DataTypes.INTEGER,
         field: 'user_id',

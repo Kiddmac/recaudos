@@ -1,14 +1,16 @@
 const express = require ('express');
 const PagosService = require('../services/pagosService');
 const validatorHandler = require('../middlewares/validatorHandler');
-const {createPagoSchema, updatePagoSchema, getPagoSchema, deletePagoSchema} = require('../schemas/pagosSchema')
+const {queryPagoSchema, createPagoSchema, updatePagoSchema, getPagoSchema, deletePagoSchema} = require('../schemas/pagosSchema')
 
 const service = new PagosService;
 const router = express.Router();
 
-router.get('/', async (req,res,next)=> {
+router.get('/',
+validatorHandler(queryPagoSchema, 'query'),
+async (req,res,next)=> {
     try {
-        const pagos = await service.find();
+        const pagos = await service.find(req.query);
         res.json(pagos)    
     } catch (err) {
         next(err)

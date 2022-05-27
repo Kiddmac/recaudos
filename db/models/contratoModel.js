@@ -55,7 +55,7 @@ const ContratosSchema = {
         defaultValue: DataTypes.NOW,
         field: 'created_at'
     },
-    userIdContrato: {
+    userId: {
         allowNull: false,
         type: DataTypes.INTEGER,
         field: 'user_id',

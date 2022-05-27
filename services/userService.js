@@ -21,8 +21,8 @@ class UsersService {
     }
 
     async findOne(id){
-        const user = await models.user.findByPk(id, {
-            include: ['pagos']
+        const user = await models.User.findByPk(id, {
+            include: ['pagos', 'contratos']
         })
         if (!user) {
             throw boom.notFound('user not found')
@@ -31,7 +31,7 @@ class UsersService {
     }
 
     async update(id, changes){
-        const user = await models.user.findByPk(id)
+        const user = await models.User.findByPk(id)
         if(!user){
             throw boom.notFound('user not found')
         }
@@ -41,7 +41,7 @@ class UsersService {
     }
     
     async delete(id){
-        const user = await models.user.findByPk(id)
+        const user = await models.User.findByPk(id)
         if(!user){
             throw boom.notFound('user not found')
         }
