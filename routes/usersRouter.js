@@ -2,12 +2,15 @@ const express = require('express');
 const UserService = require ('../services/userService')
 const { createUserSchema, getUserSchema, updateUserSchema, deleteUserSchema } = require('../schemas/userSchema')
 const validatorHandler = require('../middlewares/validatorHandler')
+const passport = require('passport')
 
 const router = express.Router();
 const service = new UserService;
 
 
-router.get('/', async (req,res,next)=>{
+router.get('/',
+passport.authenticate('jwt', {session: false}),
+async (req,res,next)=>{
     try {
         const users = await service.find()
         res.json(users)
@@ -41,6 +44,7 @@ async (req,res,next)=> {
 })
 
 router.patch('/:id',
+passport.authenticate('jwt', {session: false}),
 validatorHandler(updateUserSchema, 'id'),
 async (req,res,next)=> {
     try {
@@ -55,6 +59,7 @@ async (req,res,next)=> {
 })
 
 router.delete('/:id',
+passport.authenticate('jwt', {session: false}),
 validatorHandler(deleteUserSchema, 'id'),
 async (req,res,next)=> {
     try {

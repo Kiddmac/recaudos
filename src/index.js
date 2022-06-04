@@ -1,6 +1,6 @@
 const express = require ('express');
 const routerApi = require ('../routes/index')
-const cors = require ('cors')
+const cors = require ('cors');
 
 const { logErrors, errorHandler, boomErrorHandler} = require('../middlewares/errorHandler')
 
@@ -22,6 +22,7 @@ const options = {
 
 app.use(cors(options))
 
+require('../utils/auth/index.js')
 
 app.get('/', (req,res)=> {
     res.send('Server on express! 3000. Welcome___')

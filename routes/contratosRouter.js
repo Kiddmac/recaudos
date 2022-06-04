@@ -1,5 +1,6 @@
 const express = require ('express');
 const ContratosService = require ('../services/contratosService.js')
+const passport = require('passport')
 
 const validatorHandler = require ('../middlewares/validatorHandler');
 const {createContratoSchema, queryContratoSchema, updateContratoSchema, getContratoSchema, deleteContratoSchema} = require('../schemas/contratosSchema')
@@ -8,6 +9,7 @@ const router = express.Router();
 const service = new ContratosService();
 
 router.get('/',
+passport.authenticate('jwt', {session: false}),
 validatorHandler(queryContratoSchema, 'query'),
 async (req,res,next)=> {
     try {
@@ -19,6 +21,7 @@ async (req,res,next)=> {
 })
 
 router.get('/:id', 
+    passport.authenticate('jwt', {session: false}),
     validatorHandler(getContratoSchema, 'id'),
     async (req,res,next)=> {
         try {
@@ -33,6 +36,7 @@ router.get('/:id',
 
 
 router.post('/', 
+    passport.authenticate('jwt', {session: false}),
     validatorHandler(createContratoSchema, 'body'),
     async (req,res,next)=> {
         try {
@@ -46,6 +50,7 @@ router.post('/',
         })
 
 router.patch('/:id', 
+    passport.authenticate('jwt', {session: false}),
     validatorHandler(updateContratoSchema, 'id'),
     async (req,res,next)=> {
         try {
@@ -58,7 +63,8 @@ router.patch('/:id',
         }
     })
 
-router.delete('/:id', 
+router.delete('/:id',
+    passport.authenticate('jwt', {session: false}), 
     validatorHandler(deleteContratoSchema, 'id'),
     async (req,res,next)=> {
         try {
